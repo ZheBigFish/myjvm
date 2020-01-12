@@ -40,15 +40,15 @@ public class LocalVars {
     }
 
     public void setLong(int index, Long val){
-        slots[index].num = (int) (val & 0xffff);
-        slots[index + 1].num = (int) ((val >> 32) & 0xffffffffL);
+        slots[index].num = (int) (val & 0x000000ffffffffL);
+        slots[index + 1].num = (int) (val >> 32);
     }
 
     public Long getLong(int index){
         int low = slots[index].num;
         int high = slots[index + 1].num;
 
-        return (long) (high << 32 | low);
+        return (long) ((high & 0x000000ffffffffL) << 32 | low & 0x00000000ffffffffL);
     }
 
     public void setDouble(int index, Double val){

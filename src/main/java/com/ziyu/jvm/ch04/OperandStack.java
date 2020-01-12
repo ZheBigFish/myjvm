@@ -30,8 +30,8 @@ public class OperandStack {
     }
 
     public int popInt(){
-        int val = slots[size].num;
         size--;
+        int val = slots[size].num;
         return val;
     }
 
@@ -41,22 +41,23 @@ public class OperandStack {
     }
 
     public Float popFloat(){
-        int val = slots[size].num;
         size--;
+        int val = slots[size].num;
         return Float.parseFloat(String.valueOf(val));
     }
 
     public void pushLong(Long val){
-        slots[size].num = (int) (val & 0xffff);
-        slots[size + 1].num = (int) ((val >> 32) & 0xffffffffL);
+        slots[size].num = (int) (val & 0x000000ffffffffL);
+        slots[size + 1].num = (int) (val >> 32);
         size += 2;
     }
 
     public Long popLong(){
-        int low = slots[size - 2].num;
-        int high = slots[size - 1].num;
-        size -= 2;
-        return (long) (high << 32 | low);
+        size--;
+        int low = slots[size - 1].num;
+        int high = slots[size].num;
+        size--;
+        return (long) ((high & 0x000000ffffffffL) << 32 | low & 0x00000000ffffffffL);
     }
 
     public void pushDouble(Double val){
@@ -73,8 +74,8 @@ public class OperandStack {
     }
 
     public Object popRef(){
-        Object val = slots[size].ref;
         size--;
+        Object val = slots[size].ref;
         return val;
     }
 
