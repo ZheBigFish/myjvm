@@ -4,6 +4,8 @@ import com.ziyu.jvm.ch03.ClassReader;
 import com.ziyu.jvm.ch04.Frame;
 import com.ziyu.jvm.ch04.LocalVars;
 import com.ziyu.jvm.ch04.OperandStack;
+import com.ziyu.jvm.ch05.Interpreter;
+import com.ziyu.jvm.ch05.classfile.ClassFile;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -22,7 +24,7 @@ public class main {
     public void ch03() throws IOException {
 
         Path path = Paths.get("D:\\niubi\\mini-jvm\\target\\tt.class");
-        ClassReader.read(path);
+        com.ziyu.jvm.ch05.classfile.ClassReader.read(path);
 
     }
 
@@ -65,6 +67,16 @@ public class main {
         System.out.println(ops.popLong());
         System.out.println(ops.popInt());
         System.out.println(ops.popInt());
+    }
+
+    @Test
+    public void ch05() throws IOException {
+
+        Path path = Paths.get("D:\\niubi\\mini-jvm\\target\\tt.class");
+        ClassFile read = com.ziyu.jvm.ch05.classfile.ClassReader.read(path);
+        Interpreter interpreter = new Interpreter();
+        interpreter.interpret(read);
+
     }
 
 }

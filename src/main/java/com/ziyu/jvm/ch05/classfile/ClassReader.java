@@ -1,10 +1,10 @@
-package com.ziyu.jvm.ch03;
+package com.ziyu.jvm.ch05.classfile;
 
-import com.ziyu.jvm.ch03.attribute.CodeAttribute;
-import com.ziyu.jvm.ch03.attribute.LineNumberTableAttribute;
-import com.ziyu.jvm.ch03.cp.*;
+import com.ziyu.jvm.ch05.classfile.attribute.CodeAttribute;
+import com.ziyu.jvm.ch05.classfile.attribute.LineNumberTableAttribute;
 import com.ziyu.jvm.ch05.classfile.attribute.SourceFile;
 import com.ziyu.jvm.ch05.classfile.attribute.StackMapTable;
+import com.ziyu.jvm.ch05.classfile.cp.*;
 
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
@@ -29,8 +29,7 @@ public class ClassReader {
         try (InputStream is = Files.newInputStream(path);
              BufferedInputStream bis = new BufferedInputStream(is);
              DataInputStream stream = new DataInputStream(bis)) {
-            System.out.println(parse(stream));
-            return null;
+            return parse(stream);
         }
     }
 
@@ -169,7 +168,12 @@ public class ClassReader {
             case LineNumberTable:
                 attribute = new LineNumberTableAttribute(is);
                 break;
-
+            case StackMapTable:
+                attribute = new StackMapTable(is);
+                break;
+            case SourceFile:
+                attribute = new SourceFile(is);
+                break;
         }
         attribute.attributeNameIndex = attributeNameIndex;
 

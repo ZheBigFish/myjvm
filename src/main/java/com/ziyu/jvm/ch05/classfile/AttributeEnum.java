@@ -1,8 +1,8 @@
-package com.ziyu.jvm.ch03;
+package com.ziyu.jvm.ch05.classfile;
 
 public enum AttributeEnum {
   // Five attributes are critical to correct interpretation of the class file by the Java Virtual Machine:
-  ConstantValue("ConstantValue"),
+   ConstantValue("ConstantValue"),
   Code("Code"),
   StackMapTable("StackMapTable"),
   Exceptions("Exceptions"),
