@@ -1,6 +1,7 @@
 package com.ziyu.jvm.ch05.instructions.comparisons;
 
 import com.ziyu.jvm.ch05.instructions.base.Instruction;
+import com.ziyu.jvm.ch05.instructions.base.NoOperandsInstruction;
 import com.ziyu.jvm.ch05.rtda.Frame;
 
 /**
@@ -9,7 +10,7 @@ import com.ziyu.jvm.ch05.rtda.Frame;
  * @Author
  * @Description TODO
  **/
-public class Icmp extends Instruction {
+public class Icmp extends NoOperandsInstruction {
     @Override
     public void execute(Frame frame) {
         int i1 = frame.getOperandStack().popInt();

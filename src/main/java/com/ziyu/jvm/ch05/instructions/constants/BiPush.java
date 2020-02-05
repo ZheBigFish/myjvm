@@ -2,6 +2,7 @@ package com.ziyu.jvm.ch05.instructions.constants;
 
 import com.ziyu.jvm.ch05.instructions.base.BytecodeReader;
 import com.ziyu.jvm.ch05.instructions.base.Instruction;
+import com.ziyu.jvm.ch05.instructions.base.NoOperandsInstruction;
 import com.ziyu.jvm.ch05.rtda.Frame;
 
 /**
@@ -10,7 +11,7 @@ import com.ziyu.jvm.ch05.rtda.Frame;
  * @Author
  * @Description TODO
  **/
-public class BiPush extends Instruction{
+public class BiPush extends NoOperandsInstruction {
 
     int val;
 

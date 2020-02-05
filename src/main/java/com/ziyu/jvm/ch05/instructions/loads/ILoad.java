@@ -1,6 +1,7 @@
 package com.ziyu.jvm.ch05.instructions.loads;
 
 import com.ziyu.jvm.ch05.instructions.base.BytecodeReader;
+import com.ziyu.jvm.ch05.instructions.base.Index8Instruction;
 import com.ziyu.jvm.ch05.instructions.base.Instruction;
 import com.ziyu.jvm.ch05.rtda.Frame;
 
@@ -10,9 +11,7 @@ import com.ziyu.jvm.ch05.rtda.Frame;
  * @Author
  * @Description TODO
  **/
-public class ILoad extends Instruction {
-
-    int index;
+public class ILoad extends Index8Instruction {
 
     public static void iLoad(Frame frame, int index){
         frame.getOperandStack().pushInt(frame.getLocalVars().getInt(index));
@@ -20,7 +19,7 @@ public class ILoad extends Instruction {
 
     @Override
     public void fetchOperands(BytecodeReader bytecodeReader) {
-        this.index = bytecodeReader.readInt8();
+        index = bytecodeReader.readInt8();
     }
 
     @Override

@@ -1,18 +1,17 @@
-package com.ziyu.jvm.ch05.instructions.stack;
+package com.ziyu.jvm.ch05.instructions.conversions;
 
 import com.ziyu.jvm.ch05.instructions.base.Instruction;
 import com.ziyu.jvm.ch05.rtda.Frame;
 
 /**
- * @ClassName pop
+ * @ClassName d2x
  * @Date
  * @Author
  * @Description TODO
  **/
-public class pop2 extends Instruction {
+public class I2S extends Instruction {
     @Override
     public void execute(Frame frame) {
-        frame.getOperandStack().popSlot();
-        frame.getOperandStack().popSlot();
+        throw new RuntimeException("该指令暂未实现:" + this.getClass());
     }
 }

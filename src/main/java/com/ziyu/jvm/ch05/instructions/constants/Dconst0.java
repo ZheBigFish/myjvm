@@ -1,6 +1,7 @@
 package com.ziyu.jvm.ch05.instructions.constants;
 
 import com.ziyu.jvm.ch05.instructions.base.Instruction;
+import com.ziyu.jvm.ch05.instructions.base.NoOperandsInstruction;
 import com.ziyu.jvm.ch05.rtda.Frame;
 
 /**
@@ -9,7 +10,7 @@ import com.ziyu.jvm.ch05.rtda.Frame;
  * @Author
  * @Description TODO
  **/
-public class Dconst0 extends Instruction{
+public class Dconst0 extends NoOperandsInstruction {
 
     public void execute(Frame frame) {
         frame.getOperandStack().pushDouble(0.0);

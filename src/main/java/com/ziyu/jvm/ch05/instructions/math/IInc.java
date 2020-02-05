@@ -10,7 +10,7 @@ import com.ziyu.jvm.ch05.rtda.Frame;
  * @Author
  * @Description TODO
  **/
-public class iInc extends Instruction {
+public class IInc extends Instruction {
 
     int val;
     int index;

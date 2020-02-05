@@ -1,6 +1,6 @@
 package com.ziyu.jvm.ch05.instructions.math;
 
-import com.ziyu.jvm.ch05.instructions.base.Instruction;
+import com.ziyu.jvm.ch05.instructions.base.NoOperandsInstruction;
 import com.ziyu.jvm.ch05.rtda.Frame;
 
 /**
@@ -9,10 +9,11 @@ import com.ziyu.jvm.ch05.rtda.Frame;
  * @Author
  * @Description TODO
  **/
-public class iAdd extends Instruction {
+public class IXor extends NoOperandsInstruction {
+    @Override
     public void execute(Frame frame) {
         int i1 = frame.getOperandStack().popInt();
         int i2 = frame.getOperandStack().popInt();
-        frame.getOperandStack().pushInt(i1 + i2);
+        frame.getOperandStack().pushInt(i2 ^ i1);
     }
 }

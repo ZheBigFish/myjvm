@@ -1,14 +1,14 @@
 package com.ziyu.jvm.ch05.instructions;
 
 import com.ziyu.jvm.ch05.instructions.base.Instruction;
+import com.ziyu.jvm.ch05.instructions.base.Return;
 import com.ziyu.jvm.ch05.instructions.comparisons.IfIcmpgt;
 import com.ziyu.jvm.ch05.instructions.constants.*;
 import com.ziyu.jvm.ch05.instructions.control.Goto;
-import com.ziyu.jvm.ch05.instructions.base.Return;
 import com.ziyu.jvm.ch05.instructions.loads.ILoad1;
 import com.ziyu.jvm.ch05.instructions.loads.ILoad2;
-import com.ziyu.jvm.ch05.instructions.math.iAdd;
-import com.ziyu.jvm.ch05.instructions.math.iInc;
+import com.ziyu.jvm.ch05.instructions.math.IAdd;
+import com.ziyu.jvm.ch05.instructions.math.IInc;
 import com.ziyu.jvm.ch05.instructions.stores.IStore1;
 import com.ziyu.jvm.ch05.instructions.stores.IStore2;
 
@@ -33,8 +33,8 @@ public class factory {
             case 0xa7: return new Goto();
             case 0x3c: return new IStore1();
             case 0x3d: return new IStore2();
-            case 0x60: return new iAdd();
-            case 0x84: return new iInc();
+            case 0x60: return new IAdd();
+            case 0x84: return new IInc();
             case 0xb1: return new Return();
             default:
                 System.out.println("not found");;
