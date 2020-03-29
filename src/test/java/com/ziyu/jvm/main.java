@@ -1,11 +1,18 @@
 package com.ziyu.jvm;
 
-import com.ziyu.jvm.ch03.ClassReader;
 import com.ziyu.jvm.ch04.Frame;
 import com.ziyu.jvm.ch04.LocalVars;
 import com.ziyu.jvm.ch04.OperandStack;
 import com.ziyu.jvm.ch05.Interpreter;
 import com.ziyu.jvm.ch05.classfile.ClassFile;
+import com.ziyu.jvm.ch06.classfile.ClassReader;
+import com.ziyu.jvm.ch06.classfile.classpath.ClassPath;
+import com.ziyu.jvm.ch06.rtda.Slot;
+import com.ziyu.jvm.ch06.rtda.heap.ClassLoader;
+import com.ziyu.jvm.ch06.rtda.heap.Object;
+import com.ziyu.jvm.ch06.rtda.heap.kclass.KClass;
+import com.ziyu.jvm.ch06.rtda.heap.kclass.Method;
+import com.ziyu.jvm.ch06.rtda.heap.kclass.constantpool.HeapConstantPool;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -23,8 +30,18 @@ public class main {
     @Test
     public void ch03() throws IOException {
 
-        Path path = Paths.get("D:\\niubi\\mini-jvm\\target\\tt.class");
-        com.ziyu.jvm.ch05.classfile.ClassReader.read(path);
+//        Path path = Paths.get("D:\\niubi\\mini-jvm\\target\\tt.class");
+//        com.ziyu.jvm.ch05.classfile.ClassReader.read(path);
+
+        String s = "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd";
+        System.out.println(s.hashCode());
+        System.out.println(s.hashCode());
+        Slot slot = new Slot();
+        Slot slot1 = new Slot();
+        slot.setNum(44);
+        slot1.setNum(11);
+        slot1.setRef(new Object(new KClass()));
+        System.out.println(slot1);
 
     }
 
@@ -76,6 +93,24 @@ public class main {
         ClassFile read = com.ziyu.jvm.ch05.classfile.ClassReader.read(path);
         Interpreter interpreter = new Interpreter();
         interpreter.interpret(read);
+
+    }
+
+    @Test
+    public void ch06() throws IOException {
+
+        String[] a = new String[1];
+        a[0] = "d";
+
+        String path = "jj";
+        ClassLoader classLoader = ClassLoader.newClassLoader(new ClassPath());
+        KClass kClass = classLoader.loadClass(path);
+        Method mainMethod = kClass.getMainMethod();
+        if (mainMethod != null) {
+            com.ziyu.jvm.ch06.Interpreter.interpret(mainMethod);
+        } else {
+            System.out.println("no main method!");
+        }
 
     }
 

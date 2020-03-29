@@ -11,17 +11,17 @@ import java.util.jar.JarFile;
  **/
 public class JarEntry implements Entry {
 
-    private String path;
+    private String abspath;
 
     public JarEntry(String path) {
-        this.path = path;
+        this.abspath = path;
     }
 
     public byte[] readClass(String className) {
 
         JarFile jarFile = null;
         try {
-            jarFile = new JarFile(new File(path));
+            jarFile = new JarFile(new File(abspath));
         } catch (IOException e) {
             e.printStackTrace();
         }

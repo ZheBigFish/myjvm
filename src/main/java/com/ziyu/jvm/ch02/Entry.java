@@ -8,6 +8,7 @@ package com.ziyu.jvm.ch02;
  **/
 public interface Entry {
 
+    public static String pathListSeparator = ";";
     byte[] readClass(String className);
 
 }

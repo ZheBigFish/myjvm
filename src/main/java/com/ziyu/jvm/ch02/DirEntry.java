@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Path;
 
 /**
  * @ClassName DirEntry
@@ -12,6 +13,8 @@ import java.io.IOException;
  * @Description TODO
  **/
 public class DirEntry implements Entry {
+
+    Path absDir;
 
     public byte[] readClass(String className) {
         byte[] b = new byte[10240];
@@ -26,4 +29,9 @@ public class DirEntry implements Entry {
         return b;
     }
 
+    public DirEntry(Path path) {
+
+        this.absDir = path;
+
+    }
 }
