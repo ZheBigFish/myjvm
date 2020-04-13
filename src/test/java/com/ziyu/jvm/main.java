@@ -97,7 +97,7 @@ public class main {
     }
 
     @Test
-    public void ch06() throws IOException {
+    public void ch06() {
 
         String[] a = new String[1];
         a[0] = "d";
@@ -114,4 +114,28 @@ public class main {
 
     }
 
+    @Test
+    public void ch07() throws IOException {
+
+        com.ziyu.jvm.ch07.rtda.OperandStack operandStack = new com.ziyu.jvm.ch07.rtda.OperandStack(2);
+        com.ziyu.jvm.ch07.rtda.heap.kclass.KClass kClass1 = new com.ziyu.jvm.ch07.rtda.heap.kclass.KClass();
+        kClass1.instanceSlotCount = 1;
+        com.ziyu.jvm.ch07.rtda.heap.Object stringBuilder = new com.ziyu.jvm.ch07.rtda.heap.Object(kClass1);
+        operandStack.pushRef(stringBuilder);
+        operandStack.pushRef(stringBuilder);
+//        operandStack.pushRef(null);
+
+/*        com.ziyu.jvm.ch07.rtda.heap.kclass.KClass kClass = com.ziyu.jvm.ch07.rtda.heap.kclass.KClass.newClass(
+                com.ziyu.jvm.ch07.classfile.ClassReader.read("D:\\niubi\\myjvm\\AbstractStringBuilder.class", 4));*/
+
+        String path = "jj";
+        com.ziyu.jvm.ch07.rtda.heap.ClassLoader classLoader = com.ziyu.jvm.ch07.rtda.heap.ClassLoader.newClassLoader(new com.ziyu.jvm.ch07.classfile.classpath.ClassPath());
+        com.ziyu.jvm.ch07.rtda.heap.kclass.KClass kClass = classLoader.loadClass(path);
+        com.ziyu.jvm.ch07.rtda.heap.kclass.Method mainMethod = kClass.getMainMethod();
+        if (mainMethod != null) {
+            com.ziyu.jvm.ch07.Interpreter.interpret(mainMethod);
+        } else {
+            System.out.println("no main method!");
+        }
+    }
 }

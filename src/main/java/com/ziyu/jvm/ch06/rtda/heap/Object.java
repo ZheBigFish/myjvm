@@ -25,3 +25,4 @@ public class Object {
         return kClass.isAssignableFrom(kClass);
     }
 }
+

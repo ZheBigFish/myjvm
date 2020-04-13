@@ -53,7 +53,8 @@ public class ClassReader {
             String[] s = new String[interfacesSize];
             for (int i = 0; i < interfacesSize; i++) {
                 shorts[i] = is.readShort();
-                s[i] = new String(classFile.getConstantPool().getValue().get(shorts[i]).getBytes());
+                ClassInfo classInfo = (ClassInfo) classFile.getConstantPool().getValue().get(shorts[i]);
+                s[i] = classFile.getConstantPool().getStringValue(classInfo.getNameIndex());
             }
             return shorts;
         }
