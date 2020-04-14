@@ -12,8 +12,8 @@ import com.ziyu.jvm.ch07.rtda.Frame;
 public class Icmp extends NoOperandsInstruction {
     @Override
     public void execute(Frame frame) {
-        int i1 = frame.getOperandStack().popInt();
-        int i2 = frame.getOperandStack().popInt();
+        long i1 = frame.getOperandStack().popLong();
+        long i2 = frame.getOperandStack().popLong();
         if (i2 > i1) {
             frame.getOperandStack().pushInt(1);
         }else if(i2 == i1) {

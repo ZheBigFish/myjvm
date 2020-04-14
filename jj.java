@@ -1,26 +1,11 @@
-public class jj implements Runnable {
-    //    public static int staticVar;
-//    public final int instanceVar = 6;
+public class jj {
     public static void main(String[] args) {
-        new jj().test();
+        long x = fibonacci(30);
+        System.out.println(x);
     }
-
-    public void test() {
-        jj.staticMethod(); // invokestatic
-        jj demo = new jj(); // invokespecial
-        demo.instanceMethod(); // invokespecial
-        super.equals(null); // invokespecial
-        this.run(); // invokevirtual
-        ((Runnable) demo).run(); // invokeinterface
-    }
-
-    public static void staticMethod() {
-    }
-
-    private void instanceMethod() {
-    }
-
-    @Override
-    public void run() {
+    private static long fibonacci(long n) {
+        return 1l;
+//        if (n <= 1) { return n; }
+//        return fibonacci(n - 1) + fibonacci(n - 2);
     }
 }

@@ -45,8 +45,8 @@ public class factory {
             case 0x10: return new BiPush();
             case 0x11: return new SiPush();
             case 0x12: return new Ldc();
-//            case 0x13: return new BiPush();
-//            case 0x14: return new BiPush();
+            case 0x13: return new LdcW();
+            case 0x14: return new LdcW2();
             case 0x15: return new ILoad();
             case 0x16: return new LLoad();
             case 0x17: return new FLoad();

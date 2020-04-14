@@ -58,6 +58,7 @@ public class Invokevirtual extends Index16Instruction {
                     System.out.println("println: " + methodRef.getDescriptor());
             }
             operandStack.popRef();
+            return;
         }
 
         Method method = methodRef.resolvedMethod();
