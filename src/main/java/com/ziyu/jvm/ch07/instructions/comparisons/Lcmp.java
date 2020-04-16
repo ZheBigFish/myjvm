@@ -9,7 +9,7 @@ import com.ziyu.jvm.ch07.rtda.Frame;
  * @Author
  * @Description TODO
  **/
-public class Icmp extends NoOperandsInstruction {
+public class Lcmp extends NoOperandsInstruction {
     @Override
     public void execute(Frame frame) {
         long i1 = frame.getOperandStack().popLong();

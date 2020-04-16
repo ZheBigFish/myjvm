@@ -182,7 +182,7 @@ public class factory {
 //            case 0x91: return new I2B();
 //            case 0x92: return new IXor();
 //            case 0x93: return new LXor();
-            case 0x94: return new Icmp();
+            case 0x94: return new Lcmp();
             case 0x95: return new Fcmpl();
             case 0x96: return new Fcmpg();
             case 0x97: return new Dcmpl();
