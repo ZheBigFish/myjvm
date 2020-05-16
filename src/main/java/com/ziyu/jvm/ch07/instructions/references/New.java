@@ -1,5 +1,6 @@
 package com.ziyu.jvm.ch07.instructions.references;
 
+import com.ziyu.jvm.ch07.instructions.base.ClassInitLogic;
 import com.ziyu.jvm.ch07.instructions.base.Index16Instruction;
 import com.ziyu.jvm.ch07.rtda.Frame;
 import com.ziyu.jvm.ch07.rtda.heap.kclass.KClass;
@@ -19,6 +20,11 @@ public class New extends Index16Instruction {
         HeapConstantPool contantPool = frame.getMethod().getAClass().getContantPool();
         ClassRef constant = (ClassRef) contantPool.getConstant(this.index);
         KClass kClass = constant.resolvedClass();
+        if (!kClass.initStarted) {
+            frame.revertNextPc();
+            ClassInitLogic.initClass(frame.getThread(), kClass);
+            return;
+        }
         if (kClass.isInterface() || kClass.isAbstract()) {
             throw new RuntimeException("java.lang.InstantiationError");
         }

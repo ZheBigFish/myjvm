@@ -117,12 +117,6 @@ public class main {
     @Test
     public void ch07() throws IOException {
 
-        com.ziyu.jvm.ch07.rtda.OperandStack operandStack = new com.ziyu.jvm.ch07.rtda.OperandStack(2);
-        com.ziyu.jvm.ch07.rtda.heap.kclass.KClass kClass1 = new com.ziyu.jvm.ch07.rtda.heap.kclass.KClass();
-        kClass1.instanceSlotCount = 1;
-        com.ziyu.jvm.ch07.rtda.heap.Object stringBuilder = new com.ziyu.jvm.ch07.rtda.heap.Object(kClass1);
-        operandStack.pushRef(stringBuilder);
-        operandStack.pushRef(stringBuilder);
 //        operandStack.pushRef(null);
 
 /*        com.ziyu.jvm.ch07.rtda.heap.kclass.KClass kClass = com.ziyu.jvm.ch07.rtda.heap.kclass.KClass.newClass(

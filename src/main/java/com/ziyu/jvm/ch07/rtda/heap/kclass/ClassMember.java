@@ -28,6 +28,10 @@ public class ClassMember {
         return 0 != (this.accessFlags & AccessFlags.ACC_PUBLIC);
     }
 
+    public boolean isNative() {
+        return 0 != (this.accessFlags & AccessFlags.ACC_NATIVE);
+    }
+
     public boolean isFinal() {
         return 0 != (this.accessFlags & AccessFlags.ACC_FINAL);
     }

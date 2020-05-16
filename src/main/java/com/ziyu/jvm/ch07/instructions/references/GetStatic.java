@@ -1,9 +1,11 @@
 package com.ziyu.jvm.ch07.instructions.references;
 
+import com.ziyu.jvm.ch07.instructions.base.ClassInitLogic;
 import com.ziyu.jvm.ch07.instructions.base.Index16Instruction;
 import com.ziyu.jvm.ch07.rtda.Frame;
 import com.ziyu.jvm.ch07.rtda.Slots;
 import com.ziyu.jvm.ch07.rtda.heap.kclass.Field;
+import com.ziyu.jvm.ch07.rtda.heap.kclass.KClass;
 import com.ziyu.jvm.ch07.rtda.heap.kclass.constantpool.HeapConstantPool;
 import com.ziyu.jvm.ch07.rtda.heap.kclass.constantpool.ref.FieldRef;
 
@@ -20,6 +22,12 @@ public class GetStatic extends Index16Instruction {
         HeapConstantPool contantPool = frame.getMethod().getAClass().getContantPool();
         FieldRef fieldRef = (FieldRef) contantPool.getConstant(this.index);
         Field field = fieldRef.resolvedField();
+        KClass aClass = field.getAClass();
+        if (!aClass.initStarted) {
+            frame.revertNextPc();
+            ClassInitLogic.initClass(frame.getThread(), aClass);
+            return;
+        }
         if (!field.isStatic()){
             throw new RuntimeException();
         }

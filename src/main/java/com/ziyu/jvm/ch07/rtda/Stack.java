@@ -4,7 +4,7 @@ package com.ziyu.jvm.ch07.rtda;
  * @ClassName Stack
  * @Date
  * @Author
- * @Description TODO
+ * @Description 可以用来标记帧的最大容量
  **/
 public class Stack {
 

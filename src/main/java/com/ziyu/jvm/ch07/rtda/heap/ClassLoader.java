@@ -42,7 +42,7 @@ public class ClassLoader {
         try {
             KClass aClass = this.defineClass(bytes);
             link(aClass);
-            System.out.printf("Loader %s from", name);
+            System.out.printf("Loader Class %s\n", name);
             return aClass;
         } catch (IOException e) {
             e.printStackTrace();

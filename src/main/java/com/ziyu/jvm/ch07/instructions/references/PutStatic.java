@@ -1,5 +1,6 @@
 package com.ziyu.jvm.ch07.instructions.references;
 
+import com.ziyu.jvm.ch07.instructions.base.ClassInitLogic;
 import com.ziyu.jvm.ch07.instructions.base.Index16Instruction;
 import com.ziyu.jvm.ch07.rtda.Frame;
 import com.ziyu.jvm.ch07.rtda.Slots;
@@ -25,6 +26,11 @@ public class PutStatic extends Index16Instruction {
         KClass currentClass = currentMethod.getAClass();
         Field field = fieldRef.resolvedField();
         KClass aClass = field.getAClass();
+        if (!aClass.initStarted) {
+            frame.revertNextPc();
+            ClassInitLogic.initClass(frame.getThread(), aClass);
+            return;
+        }
         if (!field.isStatic()){
             throw new RuntimeException();
         }
@@ -33,7 +39,7 @@ public class PutStatic extends Index16Instruction {
                 throw new RuntimeException();
             }
         }
-        String descriptor = field.getDescriptor();
+        String descriptor = field.getDescriptor().substring(0, 1);
         int slotId = field.getSlotId();
         Slots staticVars = field.getAClass().getStaticVars();
         switch (descriptor){

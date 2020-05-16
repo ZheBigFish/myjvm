@@ -34,6 +34,7 @@ public class KClass {
     public int instanceSlotCount;
     public int staticSlotCount;
     public Slots staticVars;
+    public boolean initStarted;
 
     public static KClass newClass(ClassFile classFile) {
 
@@ -84,16 +85,24 @@ public class KClass {
 
     /**
      * 功能描述：C是public，或者C和D在同一个运行时包内
-     * @author ZiYu
-     * @date 2020/3/15
      *
      * @return
+     * @author ZiYu
+     * @date 2020/3/15
      **/
-    public boolean isAccessibleTo(KClass aClass){
+    public boolean isAccessibleTo(KClass aClass) {
         return this.isPublic() || this.getPackageName().equals(aClass.getPackageName());
     }
 
-    public String getPackageName(){
+    public boolean InitStarted() {
+        return this.initStarted;
+    }
+
+    public void startInit() {
+        this.initStarted = true;
+    }
+
+    public String getPackageName() {
         String[] split = this.name.split("/");
         if (split.length > 0) {
             StringBuilder stringBuilder = new StringBuilder();
@@ -105,56 +114,58 @@ public class KClass {
         return "";
     }
 
-    public boolean isSubClassOf(KClass aClass){
+    public boolean isSubClassOf(KClass aClass) {
         boolean result = false;
         do {
             result = aClass.getSuperClass() == this;
             aClass = aClass.getSuperClass();
-        }while (aClass != null);
+        } while (aClass != null);
         return result;
     }
 
-    public boolean isImplements(KClass aClass){
+    public boolean isImplements(KClass aClass) {
         boolean result = false;
         do {
             result = aClass.isSubInterfaceOf(aClass);
             aClass = aClass.getSuperClass();
-        }while (aClass != null);
+        } while (aClass != null);
         return result;
     }
 
-    public boolean isSubInterfaceOf(KClass aClass){
-        for (int i = 0; i < aClass.interfaces.length; i++){
-            if (aClass.getInterfaces()[i] == aClass || aClass.getInterfaces()[i].isSubInterfaceOf(aClass)){
+    public boolean isSubInterfaceOf(KClass aClass) {
+        for (int i = 0; i < aClass.interfaces.length; i++) {
+            if (aClass.getInterfaces()[i] == aClass || aClass.getInterfaces()[i].isSubInterfaceOf(aClass)) {
                 return true;
             }
         }
         return false;
     }
 
-    public Object newObject() {return newObject(this);}
+    public Object newObject() {
+        return newObject(this);
+    }
 
     public Object newObject(KClass kClass) {
         return new Object(kClass);
     }
 
-    public boolean isAssignableFrom(KClass s){
+    public boolean isAssignableFrom(KClass s) {
         KClass t = this;
-        if (s == t){
+        if (s == t) {
             return true;
         }
-        if (!t.isInterface()){
+        if (!t.isInterface()) {
             return s.isSubClassOf(t);
-        }else{
+        } else {
             return s.isImplements(t);
         }
     }
 
-    public Method getMainMethod(){
+    public Method getMainMethod() {
         return this.getStaticMethod("main", "([Ljava/lang/String;)V");
     }
 
-    public Method getStaticMethod(String name, String descriptor){
+    public Method getStaticMethod(String name, String descriptor) {
 
         for (Method method : this.getMethods()) {
             if (method.isStatic() && method.getName().equals(name) && method.getDescriptor().equals(descriptor)) {
@@ -163,6 +174,10 @@ public class KClass {
         }
         return null;
 
+    }
+
+    public Method GetClinitMethod() {
+        return this.getStaticMethod("<clinit>", "()V");
     }
 
 }

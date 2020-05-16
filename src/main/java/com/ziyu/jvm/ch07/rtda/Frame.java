@@ -39,4 +39,8 @@ public class Frame {
         this.method = method;
     }
 
+    public void revertNextPc() {
+        this.nextPC = this.thread.pc;
+    }
+
 }

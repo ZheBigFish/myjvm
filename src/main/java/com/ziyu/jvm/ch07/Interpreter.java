@@ -65,12 +65,12 @@ public class Interpreter {
             instruction.fetchOperands(bytecodeReader);
             frame.setNextPC(bytecodeReader.getPc());
             instruction.execute(frame);
-/*            System.out.printf("%s.%s() pc:%d, inst:%s", frame.getMethod().getAClass().getName(),  frame.getMethod().getName(),
+            System.out.printf("%s.%s() pc:%d, inst:%s", frame.getMethod().getAClass().getName(),  frame.getMethod().getName(),
                     pc, instruction);
             System.out.println();
             System.out.println(frame.getLocalVars());
             System.out.println(frame.getOperandStack());
-            System.out.println();*/
+            System.out.println();
             if (thread.isStackEmpty()) {
                 break;
             }
